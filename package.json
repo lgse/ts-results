@@ -3,6 +3,7 @@
   "version": "1.0.0",
   "description": "Lightweight success or failure results wrapper instead of throwing/using exceptions",
   "main": "dist/index.js",
+  "types": "dist/index.d.ts",
   "scripts": {
     "build": "tsc",
     "dev": "jest --watchAll",
