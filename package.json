@@ -1,17 +1,10 @@
 {
-  "name": "ts-results",
+  "name": "@lgse/ts-results",
   "version": "1.0.0",
-  "description": "Lightweight success or failure results wrapper instead of throwing/using exceptions",
+  "description": "ts-results is a lightweight Javascript library developed to solve a common problem. It returns an object indicating success or failure of an operation instead of throwing/using exceptions.",
+  "keywords": ["results", "result", "operation", "lightweight"],
   "main": "dist/index.js",
   "types": "dist/index.d.ts",
-  "scripts": {
-    "build": "tsc",
-    "dev": "jest --watchAll",
-    "test": "jest"
-  },
-  "author": "",
-  "license": "MIT",
-  "prepublish": "tsc",
   "devDependencies": {
     "@types/jest": "^29.1.1",
     "babel-jest": "^29.1.0",
@@ -19,5 +12,20 @@
     "prettier": "^2.7.1",
     "ts-jest": "^29.0.3",
     "typescript": "^4.8.4"
-  }
+  },
+  "scripts": {
+    "build": "tsc",
+    "dev": "jest --watchAll",
+    "test": "jest"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/lgse/ts-results.git"
+  },
+  "author": "Pierre Berube",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/lgse/ts-results/issues"
+  },
+  "homepage": "https://github.com/lgse/ts-results#readme"
 }
