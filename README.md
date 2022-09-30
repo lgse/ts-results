@@ -2,6 +2,11 @@
 
 ts-results is a lightweight Javascript library developed to solve a common problem. It returns an object indicating success or failure of an operation instead of throwing/using exceptions.
 
+# Install
+```
+npm install @lgse/ts-results
+```
+
 # Usage
 
 **Result.Ok()**:
