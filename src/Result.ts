@@ -56,8 +56,7 @@ export class Result<TDataType = {}> {
   }
 
   public static FailIf<T>(condition: boolean, error?: Error | null): Result<T> {
-    const result = new Result<T>(!condition);
-    return error ? result.WithError(error) : result;
+    return condition ? this.Fail(error) : this.Ok();
   }
 
   public static Try<T = {}>(
