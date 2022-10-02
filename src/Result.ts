@@ -15,7 +15,7 @@ export class Result<TDataType = {}> {
     return this.data;
   }
 
-  public WithData(data: TDataType): Result<TDataType> {
+  public WithData(data: TDataType | null): Result<TDataType> {
     this.data = data;
     return this;
   }
@@ -60,12 +60,12 @@ export class Result<TDataType = {}> {
   }
 
   public static Try<T = {}>(
-    callback: (...args: unknown[]) => any,
+    callback: (...args: unknown[]) => T | null,
     errorTransformer?: (e: unknown) => Error | null
   ): Result<T> {
     try {
-      callback();
-      return new Result<T>(true);
+      const data = callback();
+      return new Result<T>(true).WithData(data);
     } catch (e) {
       const error =
         typeof errorTransformer === 'function' ? errorTransformer(e) : null;
