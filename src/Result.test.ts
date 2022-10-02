@@ -25,6 +25,12 @@ test('Result.Try() returns a success object with a passing try statement', () =>
   expect(result.IsOk()).toBe(true);
 });
 
+test('Result.Try() returns a success object with a data', () => {
+  const result = Result.Try(() => 1 + 1);
+  expect(result.IsOk()).toBe(true);
+  expect(result.Data()).toBe(2);
+});
+
 test('Result.Try() returns a failure object with a failing try statement', () => {
   const result = Result.Try(() => {
     throw new Error('An error occurred');
