@@ -20,6 +20,12 @@ test('Result.FailIf() returns a failure result object with a failing condition',
   expect(result.IsOk()).toBe(false);
 });
 
+test('Result.FailIf() returns a success result object with no errors if condition is false', () => {
+  const result = Result.FailIf(1 + 1 == 4, new Error("failure"));
+  expect(result.IsOk()).toBe(true);
+  expect(result.HasErrors()).toBe(false);
+});
+
 test('Result.Try() returns a success object with a passing try statement', () => {
   const result = Result.Try(() => {});
   expect(result.IsOk()).toBe(true);
