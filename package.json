@@ -1,6 +1,6 @@
 {
   "name": "@lgse/ts-results",
-  "version": "1.0.1",
+  "version": "1.0.2",
   "description": "ts-results is a lightweight Javascript library developed to solve a common problem. It returns an object indicating success or failure of an operation instead of throwing/using exceptions.",
   "keywords": [
     "results",
