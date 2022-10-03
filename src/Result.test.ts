@@ -21,7 +21,7 @@ test('Result.FailIf() returns a failure result object with a failing condition',
 });
 
 test('Result.FailIf() returns a success result object with no errors if condition is false', () => {
-  const result = Result.FailIf(1 + 1 == 4, new Error("failure"));
+  const result = Result.FailIf(1 + 1 == 4, new Error('failure'));
   expect(result.IsOk()).toBe(true);
   expect(result.HasErrors()).toBe(false);
 });
@@ -31,7 +31,7 @@ test('Result.Try() returns a success object with a passing try statement', () =>
   expect(result.IsOk()).toBe(true);
 });
 
-test('Result.Try() returns a success object with a data', () => {
+test('Result.Try() returns a success object with data', () => {
   const result = Result.Try(() => 1 + 1);
   expect(result.IsOk()).toBe(true);
   expect(result.Data()).toBe(2);

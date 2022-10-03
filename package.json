@@ -21,6 +21,7 @@
   "scripts": {
     "build": "tsc",
     "dev": "jest --watchAll",
+    "prettier": "prettier --write \"src/**/*.js\"",
     "test": "jest"
   },
   "repository": {
