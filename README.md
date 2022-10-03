@@ -1,7 +1,6 @@
 # ts-results
 
-ts-results is a lightweight Javascript library developed to solve a common problem. It returns an object indicating success or failure of an operation instead of throwing/using exceptions.
-
+ts-results is a lightweight Javascript library developed to solve a common problem. It returns an object indicating success or failure of an operation instead of throwing/using exceptions. Inspired by [Fluent Results Library for C#](https://github.com/altmann/FluentResults)
 # Install
 ```
 npm install @lgse/ts-results
