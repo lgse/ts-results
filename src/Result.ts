@@ -3,8 +3,9 @@ export class Result<TDataType = {}> {
   protected data: TDataType | null = null;
   private errors: Array<Error> = [];
 
-  protected constructor(success: boolean) {
+  protected constructor(success: boolean, data: TDataType | null = null) {
     this.success = success;
+    this.data = data;
   }
 
   public IsOk(): boolean {
@@ -42,8 +43,8 @@ export class Result<TDataType = {}> {
     return false;
   }
 
-  public static Ok<T = {}>(): Result<T> {
-    return new Result<T>(true);
+  public static Ok<T = {}>(data: T | null = null): Result<T> {
+    return new Result<T>(true, data);
   }
 
   public static OkIf<T = {}>(condition: boolean): Result<T> {
