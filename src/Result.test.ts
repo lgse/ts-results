@@ -5,6 +5,12 @@ test('Result.Ok() returns a success result object', () => {
   expect(result.IsOk()).toBe(true);
 });
 
+test('Result.Ok([1,2,3]) returns a success result object with data', () => {
+  const result = Result.Ok<Array<number>>([1, 2, 3]);
+  expect(result.IsOk()).toBe(true);
+  expect(result.Data()).toEqual([1, 2, 3]);
+});
+
 test('Result.OkIf() returns a success result object with a passing condition', () => {
   const result = Result.OkIf(1 + 1 === 2);
   expect(result.IsOk()).toBe(true);
