@@ -15,6 +15,14 @@ const result = Result.Ok();
 // result.IsOk() returns true
 ```
 
+**Result\<T>.Ok()**:
+```typescript
+const result = Result<Array<number>>.Ok([1, 2, 3]);
+const data = result.Data(); // [1,2,3]
+
+// result.IsOk() returns true
+```
+
 **Result.Ok().WithData()**:
 ```typescript
 const result = Result.Ok().WithData([1, 2, 3]);
