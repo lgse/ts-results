@@ -30,9 +30,9 @@ jobs:
 
       # Build
       - name: Run build
-        run:
-          - rm -rf dist
-          - yarn build
+        run: |
+          rm -rf dist
+          yarn build
 
       # Configure Git
       - name: Git configuration
