@@ -63,7 +63,8 @@ jobs:
       # Commit changes
       - name: Commit changes and create tag
         run: |
-          git add "dist/\*" "package.json"
+          git add dist/\*
+          git add package.json
           git commit -m "chore: release ${{ env.NEW_VERSION }}"
           git tag ${{ env.NEW_VERSION }}
 
