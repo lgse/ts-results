@@ -28,6 +28,12 @@ jobs:
       - name: Run tests
         run: yarn test
 
+      # Build
+      - name: Run build
+        run:
+          - rm -rf dist
+          - yarn build
+
       # Configure Git
       - name: Git configuration
         run: |
@@ -55,9 +61,9 @@ jobs:
           RELEASE_TYPE: ${{ github.event.inputs.release-type }}
 
       # Commit changes
-      - name: Commit package.json changes and create tag
+      - name: Commit changes and create tag
         run: |
-          git add "package.json"
+          git add "dist/\*" "package.json"
           git commit -m "chore: release ${{ env.NEW_VERSION }}"
           git tag ${{ env.NEW_VERSION }}
 
