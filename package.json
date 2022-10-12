@@ -9,7 +9,8 @@
     "lightweight"
   ],
   "main": "dist/index.js",
-  "types": "src/index.d.ts",
+  "types": "dist/index.d.ts",
+  "files": ["/dist"],
   "devDependencies": {
     "@types/jest": "^29.1.1",
     "babel-jest": "^29.1.0",
