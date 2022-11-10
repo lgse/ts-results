@@ -1,18 +1,30 @@
 export declare class Result<TDataType = {}> {
     protected readonly success: boolean;
-    protected data: TDataType | null;
-    private errors;
+    protected _data: TDataType | null;
+    private _errors;
     protected constructor(success: boolean, data?: TDataType | null);
+    isOk(): boolean;
     IsOk(): boolean;
+    data(): TDataType | null;
     Data(): TDataType | null;
+    withData(data: TDataType | null): Result<TDataType>;
     WithData(data: TDataType | null): Result<TDataType>;
+    errors(): Array<Error>;
     Errors(): Array<Error>;
+    withError(error: Error): Result<TDataType>;
     WithError(error: Error): Result<TDataType>;
+    hasErrors(): boolean;
     HasErrors(): boolean;
+    hasErrorType(errorType: any): boolean;
     HasErrorType(errorType: any): boolean;
+    static ok<T = {}>(data?: T | null): Result<T>;
     static Ok<T = {}>(data?: T | null): Result<T>;
+    static okIf<T = {}>(condition: boolean): Result<T>;
     static OkIf<T = {}>(condition: boolean): Result<T>;
+    static fail<T>(error?: Error | null): Result<T>;
     static Fail<T>(error?: Error | null): Result<T>;
+    static failIf<T>(condition: boolean, error?: Error | null): Result<T>;
     static FailIf<T>(condition: boolean, error?: Error | null): Result<T>;
+    static try<T = {}>(callback: (...args: unknown[]) => T | null, errorTransformer?: (e: unknown) => Error | null): Result<T>;
     static Try<T = {}>(callback: (...args: unknown[]) => T | null, errorTransformer?: (e: unknown) => Error | null): Result<T>;
 }
