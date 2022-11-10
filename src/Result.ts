@@ -1,76 +1,127 @@
 export class Result<TDataType = {}> {
   protected readonly success: boolean;
-  protected data: TDataType | null = null;
-  private errors: Array<Error> = [];
+  protected _data: TDataType | null = null;
+  private _errors: Array<Error> = [];
 
   protected constructor(success: boolean, data: TDataType | null = null) {
     this.success = success;
-    this.data = data;
+    this._data = data;
   }
 
-  public IsOk(): boolean {
+  public isOk(): boolean {
     return this.success;
   }
 
+  public IsOk(): boolean {
+    return this.isOk();
+  }
+
+  public data(): TDataType | null {
+    return this._data;
+  }
+
   public Data(): TDataType | null {
-    return this.data;
+    return this.data();
+  }
+
+  public withData(data: TDataType | null): Result<TDataType> {
+    this._data = data;
+    return this;
   }
 
   public WithData(data: TDataType | null): Result<TDataType> {
-    this.data = data;
-    return this;
+    return this.withData(data);
+  }
+
+  public errors(): Array<Error> {
+    return this._errors;
   }
 
   public Errors(): Array<Error> {
-    return this.errors;
+    return this.errors();
   }
 
-  public WithError(error: Error): Result<TDataType> {
-    this.errors.push(error);
+  public withError(error: Error): Result<TDataType> {
+    this._errors.push(error);
     return this;
   }
 
-  public HasErrors(): boolean {
-    return this.errors.length > 0;
+  public WithError(error: Error): Result<TDataType> {
+    return this.withError(error);
   }
 
-  public HasErrorType(errorType: any): boolean {
-    for (let i = 0; i < this.errors.length; i += 1) {
-      if (this.errors[i] instanceof errorType) {
+  public hasErrors(): boolean {
+    return this._errors.length > 0;
+  }
+
+  public HasErrors(): boolean {
+    return this.hasErrors();
+  }
+
+  public hasErrorType(errorType: any): boolean {
+    for (let i = 0; i < this._errors.length; i += 1) {
+      if (this._errors[i] instanceof errorType) {
         return true;
       }
     }
     return false;
   }
 
-  public static Ok<T = {}>(data: T | null = null): Result<T> {
+  public HasErrorType(errorType: any): boolean {
+    return this.hasErrorType(errorType);
+  }
+
+  public static ok<T = {}>(data: T | null = null): Result<T> {
     return new Result<T>(true, data);
   }
 
-  public static OkIf<T = {}>(condition: boolean): Result<T> {
+  public static Ok<T = {}>(data: T | null = null): Result<T> {
+    return this.ok(data);
+  }
+
+  public static okIf<T = {}>(condition: boolean): Result<T> {
     return new Result<T>(condition);
   }
 
-  public static Fail<T>(error?: Error | null): Result<T> {
+  public static OkIf<T = {}>(condition: boolean): Result<T> {
+    return this.okIf(condition);
+  }
+
+  public static fail<T>(error?: Error | null): Result<T> {
     const result = new Result<T>(false);
-    return error ? result.WithError(error) : result;
+    return error ? result.withError(error) : result;
+  }
+
+  public static Fail<T>(error?: Error | null): Result<T> {
+    return this.fail(error);
+  }
+
+  public static failIf<T>(condition: boolean, error?: Error | null): Result<T> {
+    return condition ? Result.fail(error) : Result.Ok();
   }
 
   public static FailIf<T>(condition: boolean, error?: Error | null): Result<T> {
-    return condition ? Result.Fail(error) : Result.Ok();
+    return this.failIf(condition, error);
+  }
+
+  public static try<T = {}>(
+    callback: (...args: unknown[]) => T | null,
+    errorTransformer?: (e: unknown) => Error | null
+  ): Result<T> {
+    try {
+      const data = callback();
+      return Result.ok(data);
+    } catch (e) {
+      const error =
+        typeof errorTransformer === 'function' ? errorTransformer(e) : null;
+      return Result.fail<T>(error);
+    }
   }
 
   public static Try<T = {}>(
     callback: (...args: unknown[]) => T | null,
     errorTransformer?: (e: unknown) => Error | null
   ): Result<T> {
-    try {
-      const data = callback();
-      return new Result<T>(true).WithData(data);
-    } catch (e) {
-      const error =
-        typeof errorTransformer === 'function' ? errorTransformer(e) : null;
-      return Result.Fail<T>(error);
-    }
+    return this.try<T>(callback, errorTransformer);
   }
 }
